@@ -4,16 +4,16 @@ require './lib/player'
 require 'pry'
 
 describe Player do
-  let(:player1){Player.new("Tom")}
-  # let(:player2){Player.new}
+  let(:player){Player.new("Tom", "O")}
+  let(:player2){Player.new}
 
   it 'exists' do
-    expect(player1).to be_an_instance_of(Player)
+    expect(player).to be_an_instance_of Player
   end
 
-  xit 'can only recieve a-g inputs' do
-    player1.recieve_move
-   expect(player1.recieve_move).to eq(1)
+  it 'player has a ' do
+    expect(player.name).to eq "Tom"
+    expect(player.piece).to eq "O"
   end
 
 end
