@@ -11,7 +11,7 @@ describe Player do
     expect(player).to be_an_instance_of Player
   end
 
-  it 'player has a ' do
+  it 'player has attributes' do
     expect(player.name).to eq "Tom"
     expect(player.piece).to eq "O"
   end
