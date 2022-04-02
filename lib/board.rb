@@ -1,4 +1,4 @@
-require 'pp'
+require 'pry'
 
 class Board
 
@@ -25,6 +25,7 @@ class Board
 
   def print_board
     (row6,row5,row4,row3,row2,row1,) = @hash_columns.values.transpose
+
 
     puts " A B C D E F G"
     p row6.join(' ')

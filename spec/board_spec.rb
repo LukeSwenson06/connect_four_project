@@ -26,7 +26,6 @@ describe Board do
 
 
   it "will print the board" do
-      # binding.pry
   expect(board).to respond_to(:print_board)
   end
 end
