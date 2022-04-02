@@ -13,6 +13,7 @@ describe Player do
 
   it 'player has a ' do
     expect(player.name).to eq "Tom"
+    expect(player.piece).to eq "O"
   end
 
 end
