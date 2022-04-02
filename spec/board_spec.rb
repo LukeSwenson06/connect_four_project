@@ -20,12 +20,12 @@ describe Board do
       G: ['.', '.', '.', '.', '.', '.'],})
   end
 
-  it 'can print welcome message' do
+  xit 'can print welcome message' do
     expect(board.welcome_message).to eq("Welcome, please select a column (A-G)")
   end
 
 
-  it "will print the board" do
+  xit "will print the board" do
       # binding.pry
   expect(board).to respond_to(:print_board)
   end
