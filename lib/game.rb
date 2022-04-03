@@ -14,6 +14,8 @@ class Game
     user_input = gets.chomp.downcase.to_sym
     check_column(user_input)
     @board.print_board
+    vertical_win_clause
+    horizontal_win_clause
     #check win condition method
   end
 
@@ -24,6 +26,8 @@ class Game
     comp_input = choices[0]
     check_column(comp_input)
     @board.print_board
+    vertical_win_clause
+    horizontal_win_clause
     #check comp_win_claus
   end
 
@@ -71,8 +75,7 @@ class Game
      player_win
    end
  end
-    #conditional to win diagonal
-    # condition to diagonal
+  
   def horizontal_win_clause
     (row6,row5,row4,row3,row2,row1,) = @board.hash_columns.values.transpose
     six = row6.find_all_index('X')
