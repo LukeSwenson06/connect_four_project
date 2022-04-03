@@ -7,6 +7,7 @@ describe Board do
 
   it 'exists' do
     expect(board).to be_a(Board)
+      binding.pry
   end
 
   xit 'it has an hash' do
@@ -28,5 +29,11 @@ describe Board do
   xit "will print the board" do
       # binding.pry
   expect(board).to respond_to(:print_board)
+  end
+
+  it "can recieve user input" do
+    board.user_input
+
+    expect(board.user_input).to eq([STDIN.gets.chomp.upcase.to_sym])
   end
 end
