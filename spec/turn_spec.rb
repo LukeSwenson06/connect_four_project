@@ -13,7 +13,7 @@ describe 'Turn' do
   end
 
   it "can recieve input and check if column is full" do
-      require'pry';binding.pry
+
     expect(turn.player_turn).to eq(1)
   end
 

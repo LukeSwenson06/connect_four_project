@@ -18,11 +18,6 @@ class Board
     @hash_columns = hash_columns
   end
 
-  def welcome_message
-    return "Welcome, please select a column (A-G)"
-  end
-
-
   def print_board
     (row6,row5,row4,row3,row2,row1,) = @hash_columns.values.transpose
 
