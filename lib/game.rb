@@ -4,7 +4,7 @@ class Game
 
   def initialize
     @board = Board.new
-    #@message = Message.new
+    @message = Message.new
 
   end
 
@@ -23,7 +23,7 @@ class Game
   end
 
   def player_turn
-    #enter letter message
+    @message.user_message
     user_input = gets.chomp.downcase.to_sym
     check_column(user_input)
     @board.print_board
@@ -40,7 +40,7 @@ class Game
   end
 
   def turn
-    game.player_turn
+    player_turn
     comp_turn
     turn
   end
