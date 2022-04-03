@@ -20,4 +20,14 @@ class Message
   def invalid_input_message
     puts "Invalid input, Please type 'start' to begin, please type 'exit'
     to exit."
+  end
+
+  def player_win_message
+    puts "Congrulations! You won!"
+    end
+
+  def computer_win_message
+    puts "Game Over! Please try again."
+
+  end
 end

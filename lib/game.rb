@@ -9,20 +9,6 @@ class Game
 
   end
 
-  def player_win_claus
-    #conditional to win vertical
-    #conditional to win horizontal
-    #conditional to win diagonal
-    # condition to draw
-  end
-
-  def comp_win_claus
-    #conditional to win vertical
-    #conditional to win horizontal
-    #conditional to win diagonal
-    # condition to draw
-  end
-
   def player_turn
     @message.player_message
     user_input = gets.chomp.downcase.to_sym
@@ -73,5 +59,30 @@ class Game
       @message.invalid_input_message
       start
     end
+  end
+
+  def vertical_win_claus(user_input)
+   vertical = @board.hash_columns[user_input].find_all_index("X")
+   if vertical == [0, 1, 2, 3]
+     player_win
+   elsif vertical == [1, 2, 3, 4]
+     player_win
+   elsif vertical == [2, 3, 4, 5]
+     player_win 
+   end
+ end
+    #conditional to win diagonal
+    # condition to diagonal
+    def
+
+
+  def player_win
+    @message.player_win_message
+    break
+  end
+
+  def computer_win
+    @message.computer_win_message
+    break
   end
 end
