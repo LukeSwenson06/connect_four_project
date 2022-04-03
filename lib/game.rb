@@ -4,7 +4,8 @@ class Game
 
   def initialize
     @board = Board.new
-    #@message = Message.new
+    @message = Message.new
+
 
   end
 
@@ -23,7 +24,7 @@ class Game
   end
 
   def player_turn
-    #enter letter message
+    @message.player_message
     user_input = gets.chomp.downcase.to_sym
     check_column(user_input)
     @board.print_board
@@ -31,6 +32,7 @@ class Game
   end
 
   def comp_turn
+    @message.computer_message
     choices = [:a, :b, :c, :d, :e, :f, :g]
     choices.shuffle!
     comp_input = choices[0]
@@ -48,12 +50,11 @@ class Game
 
   def check_column(user_input)
     if @board.hash_columns[user_input][5] == "."
-       place_piece(user_input)
+      place_piece(user_input)
     else
-       p 'error select column a-g'#to do put in error message
-       player_turn
+      @message.error_message
+      player_turn
     end
-
   end
 
   def place_piece(user_input)
@@ -62,26 +63,15 @@ class Game
   end
 
   def start
-      #welcome message
-      #prompt for begin input
-      #if begin input == 'starting phrase'
-        #begin turn loop
-      #else if input == 'exit'
-        #bail out of the game
-      #else
-        #invalid input message
-        #loop back to start
+    @message.welcome_message
+    start_input = gets.chomp.downcase.to_sym
+    if start_input == 'start'
+      turn
+    elsif input == 'exit'
+      break
+    else
+      @message.invalid_input_message
+      start
+    end
   end
-
-end
-
-
-
-
-
-
-
-
-
-
 end
