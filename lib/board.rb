@@ -14,6 +14,7 @@ class Board
     g: ['.', '.', '.', '.', '.', '.']
     })
     @hash_columns = hash_columns
+
   end
 
   def print_board
