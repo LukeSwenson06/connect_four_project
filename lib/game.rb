@@ -5,12 +5,10 @@ class Game
   def initialize
     @board = Board.new
     @message = Message.new
-
-
   end
 
   def player_turn
-    @message.player_message
+    @message.user_message
     user_input = gets.chomp.downcase.to_sym
     check_column(user_input)
     @board.print_board
@@ -20,7 +18,6 @@ class Game
   end
 
   def comp_turn
-    @message.computer_message
     choices = [:a, :b, :c, :d, :e, :f, :g]
     choices.shuffle!
     comp_input = choices[0]
@@ -32,7 +29,7 @@ class Game
   end
 
   def turn
-    game.player_turn
+    player_turn
     comp_turn
     turn
   end
@@ -40,11 +37,12 @@ class Game
 
   def check_column(user_input)
     if @board.hash_columns[user_input][5] == "."
-      place_piece(user_input)
+       place_piece(user_input)
     else
-      @message.error_message
-      player_turn
+       p 'error select column a-g'#to do put in error message
+       player_turn
     end
+
   end
 
   def place_piece(user_input)
@@ -74,7 +72,7 @@ class Game
    elsif vertical == [2, 3, 4, 5]
      player_win
    end
- end
+  end
   
   def horizontal_win_clause
     (row6,row5,row4,row3,row2,row1,) = @board.hash_columns.values.transpose
