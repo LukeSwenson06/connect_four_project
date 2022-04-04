@@ -8,9 +8,6 @@ describe Game do
 
   it "exists" do
     expect(game).to be_a(Game)
-    # expect(@board).to be_a(Board)
-    # expect(@message).to be_a(Message)
-
   end
 
   it 'can execute player_win' do
@@ -21,4 +18,27 @@ describe Game do
     expect(game).to respond_to(:computer_win)
   end
 
+  it 'can place a piece' do
+    game.place_piece(:a)
+    expect(game.board.hash_columns[:a][0]).to eq('X')
+    game.place_piece(:a)
+    expect(game.board.hash_columns[:a][1]).to eq('X')
+
+  end
+
+  xit 'can determine a vertical win' do
+    game.place_piece(:a)
+    game.place_piece(:a)
+    game.place_piece(:a)
+    game.place_piece(:a)
+    game.player_vertical_win_clause(:a)
+  end
+
+  xit 'can determine a horizontal win' do
+    game.place_piece(:a)
+    game.place_piece(:b)
+    game.place_piece(:c)
+    game.place_piece(:d)
+    game.player_horizontal_win_clause
+  end
 end
