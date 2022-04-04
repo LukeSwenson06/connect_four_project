@@ -1,5 +1,9 @@
 class Message
 
+  def initialize
+
+  end
+
   def welcome_message
     puts "Welcome to Connect4! Please type 'start' to begin, please type 'exit'
     to exit"
