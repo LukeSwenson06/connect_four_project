@@ -148,11 +148,11 @@ class Game
   def comp_vertical_win_clause(user_input)
    vertical = @board.hash_columns[user_input].find_all_index("O")
    if vertical == [0, 1, 2, 3]
-     player_win
+     computer_win
    elsif vertical == [1, 2, 3, 4]
-     player_win
+     computer_win
    elsif vertical == [2, 3, 4, 5]
-     player_win
+     computer_win
    end
   end
 
@@ -160,68 +160,68 @@ class Game
     (row6,row5,row4,row3,row2,row1,) = @board.hash_columns.values.transpose
     six = row6.find_all_index('O')
     if six == [0, 1, 2, 3]
-      player_win
+      computer_win
     elsif six == [1, 2, 3, 4]
-      player_win
+      computer_win
     elsif six == [2, 3, 4, 5]
-      player_win
+      computer_win
     elsif six == [3, 4, 5, 6]
-      player_win
+      computer_win
     end
 
     five = row5.find_all_index('O')
     if five == [0, 1, 2, 3]
-      player_win
+      computer_win
     elsif five == [1, 2, 3, 4]
-      player_win
+      computer_win
     elsif five == [2, 3, 4, 5]
-      player_win
+      computer_win
     elsif five == [3, 4, 5, 6]
-      player_win
+      computer_win
     end
 
     four = row4.find_all_index('O')
     if four == [0, 1, 2, 3]
-      player_win
+      computer_win
     elsif four == [1, 2, 3, 4]
-      player_win
+      computer_win
     elsif four == [2, 3, 4, 5]
-      player_win
+      computer_win
     elsif four == [3, 4, 5, 6]
-      player_win
+      computer_win
     end
 
     three = row3.find_all_index('O')
     if three == [0, 1, 2, 3]
-      player_win
+      computer_win
     elsif three == [1, 2, 3, 4]
-      player_win
+      computer_win
     elsif three == [2, 3, 4, 5]
-      player_win
+      computer_win
     elsif three == [3, 4, 5, 6]
-      player_win
+      computer_win
     end
 
     two = row2.find_all_index('O')
     if two == [0, 1, 2, 3]
-      player_win
+      computer_win
     elsif two == [1, 2, 3, 4]
-      player_win
+      computer_win
     elsif two == [2, 3, 4, 5]
-      player_win
+      computer_win
     elsif two == [3, 4, 5, 6]
-      player_win
+      computer_win
     end
 
     one = row1.find_all_index('O')
     if one == [0, 1, 2, 3]
-      player_win
+      computer_win
     elsif one == [1, 2, 3, 4]
-      player_win
+      computer_win
     elsif one == [2, 3, 4, 5]
-      player_win
+      computer_win
     elsif one == [3, 4, 5, 6]
-      player_win
+      computer_win
     end
   end
 
