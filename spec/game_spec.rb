@@ -17,4 +17,8 @@ describe Game do
     expect(game).to respond_to(:player_win)
   end
 
+  it 'can execute computer_win' do
+    expect(game).to respond_to(:computer_win)
+  end
+
 end
