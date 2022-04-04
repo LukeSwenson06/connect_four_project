@@ -2,7 +2,7 @@ require './lib/board'
 require './lib/messages'
 
 class Game
-
+  attr_reader :board
   def initialize
     @board = Board.new
     @message = Message.new
@@ -11,9 +11,9 @@ class Game
   def player_turn
     @message.player_message
     user_input = gets.chomp.downcase.to_sym
-    check_column(user_input)
+    player_check_column(user_input)
     @board.print_board
-    player_vertical_win_clause
+    player_vertical_win_clause(user_input)
     player_horizontal_win_clause
     #check diag win condition method
   end
@@ -22,9 +22,9 @@ class Game
     choices = [:a, :b, :c, :d, :e, :f, :g]
     choices.shuffle!
     comp_input = choices[0]
-    check_column(comp_input)
+    comp_check_column(comp_input)
     @board.print_board
-    comp_vertical_win_clause
+    comp_vertical_win_clause(comp_input)
     comp_horizontal_win_clause
     #check diag win condition method
   end
@@ -36,29 +36,42 @@ class Game
   end
 
 
-  def check_column(user_input)
+  def player_check_column(user_input)
     if @board.hash_columns[user_input][5] == "."
-       place_piece(user_input)
+       player_place_piece(user_input)
     else
        @message.error_message
        player_turn
     end
-
   end
 
-  def place_piece(user_input)
+  def comp_check_column(comp_input)
+    if @board.hash_columns[comp_input][5] == "."
+       comp_place_piece(comp_input)
+    else
+       @message.error_message
+       comp_turn
+    end
+  end
+
+  def player_place_piece(user_input)
     index = @board.hash_columns[user_input].find_index(".")
     @board.hash_columns[user_input][index] = "X"
   end
 
+  def comp_place_piece(comp_input)
+    index = @board.hash_columns[comp_input].find_index(".")
+    @board.hash_columns[comp_input][index] = "O"
+  end
+
   def start
     @message.welcome_message
-    start_input = gets.chomp.downcase.to_sym
+    start_input = gets.chomp.downcase
     if start_input == 'start'
       turn
-    elsif input == 'exit'
+    elsif start_input == 'exit'
       p 'sucks to suck'
-      # break
+      abort
     else
       @message.invalid_input_message
       start
@@ -66,7 +79,7 @@ class Game
   end
 
   def player_vertical_win_clause(user_input)
-   vertical = @board.hash_columns[user_input].find_all_index("X")
+  vertical = @board.hash_columns[user_input].each_with_index.map{|x,i| x == "X"? i : nil}.compact
    if vertical == [0, 1, 2, 3]
      player_win
    elsif vertical == [1, 2, 3, 4]
@@ -78,7 +91,7 @@ class Game
 
   def player_horizontal_win_clause
     (row6,row5,row4,row3,row2,row1,) = @board.hash_columns.values.transpose
-    six = row6.find_all_index('X')
+    six = row6.each_with_index.map{|x,i| x == "X"? i : nil}.compact
     if six == [0, 1, 2, 3]
       player_win
     elsif six == [1, 2, 3, 4]
@@ -89,7 +102,7 @@ class Game
       player_win
     end
 
-    five = row5.find_all_index('X')
+    five = row5.each_with_index.map{|x,i| x == "X"? i : nil}.compact
     if five == [0, 1, 2, 3]
       player_win
     elsif five == [1, 2, 3, 4]
@@ -100,7 +113,7 @@ class Game
       player_win
     end
 
-    four = row4.find_all_index('X')
+    four = row4.each_with_index.map{|x,i| x == "X"? i : nil}.compact
     if four == [0, 1, 2, 3]
       player_win
     elsif four == [1, 2, 3, 4]
@@ -111,7 +124,7 @@ class Game
       player_win
     end
 
-    three = row3.find_all_index('X')
+    three = row3.each_with_index.map{|x,i| x == "X"? i : nil}.compact
     if three == [0, 1, 2, 3]
       player_win
     elsif three == [1, 2, 3, 4]
@@ -122,7 +135,7 @@ class Game
       player_win
     end
 
-    two = row2.find_all_index('X')
+    two = row2.each_with_index.map{|x,i| x == "X"? i : nil}.compact
     if two == [0, 1, 2, 3]
       player_win
     elsif two == [1, 2, 3, 4]
@@ -133,7 +146,7 @@ class Game
       player_win
     end
 
-    one = row1.find_all_index('X')
+    one = row1.each_with_index.map{|x,i| x == "X"? i : nil}.compact
     if one == [0, 1, 2, 3]
       player_win
     elsif one == [1, 2, 3, 4]
@@ -145,8 +158,8 @@ class Game
     end
   end
 
-  def comp_vertical_win_clause(user_input)
-   vertical = @board.hash_columns[user_input].find_all_index("O")
+  def comp_vertical_win_clause(comp_input)
+    vertical = @board.hash_columns[comp_input].each_with_index.map{|x,i| x == "O"? i : nil}.compact
    if vertical == [0, 1, 2, 3]
      computer_win
    elsif vertical == [1, 2, 3, 4]
@@ -158,7 +171,7 @@ class Game
 
   def comp_horizontal_win_clause
     (row6,row5,row4,row3,row2,row1,) = @board.hash_columns.values.transpose
-    six = row6.find_all_index('O')
+    six = row6.each_with_index.map{|x,i| x == "O"? i : nil}.compact
     if six == [0, 1, 2, 3]
       computer_win
     elsif six == [1, 2, 3, 4]
@@ -169,7 +182,7 @@ class Game
       computer_win
     end
 
-    five = row5.find_all_index('O')
+    five = row5.each_with_index.map{|x,i| x == "O"? i : nil}.compact
     if five == [0, 1, 2, 3]
       computer_win
     elsif five == [1, 2, 3, 4]
@@ -180,7 +193,7 @@ class Game
       computer_win
     end
 
-    four = row4.find_all_index('O')
+    four = row4.each_with_index.map{|x,i| x == "O"? i : nil}.compact
     if four == [0, 1, 2, 3]
       computer_win
     elsif four == [1, 2, 3, 4]
@@ -191,7 +204,7 @@ class Game
       computer_win
     end
 
-    three = row3.find_all_index('O')
+    three = row3.each_with_index.map{|x,i| x == "O"? i : nil}.compact
     if three == [0, 1, 2, 3]
       computer_win
     elsif three == [1, 2, 3, 4]
@@ -202,7 +215,7 @@ class Game
       computer_win
     end
 
-    two = row2.find_all_index('O')
+    two = row2.each_with_index.map{|x,i| x == "O"? i : nil}.compact
     if two == [0, 1, 2, 3]
       computer_win
     elsif two == [1, 2, 3, 4]
@@ -213,7 +226,7 @@ class Game
       computer_win
     end
 
-    one = row1.find_all_index('O')
+    one = row1.each_with_index.map{|x,i| x == "O"? i : nil}.compact
     if one == [0, 1, 2, 3]
       computer_win
     elsif one == [1, 2, 3, 4]
@@ -229,13 +242,10 @@ class Game
   def player_win
     @message.player_win_message
     abort
-    # break
   end
 
   def computer_win
     @message.computer_win_message
     abort
-
-    # break
   end
 end
