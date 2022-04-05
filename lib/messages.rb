@@ -32,6 +32,9 @@ class Message
 
   def computer_win_message
     puts "Game Over! Please try again."
+  end
 
+  def draw_message
+    puts "Its a draw!"
   end
 end

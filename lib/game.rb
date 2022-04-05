@@ -11,11 +11,26 @@ class Game
   def player_turn
     @message.player_message
     user_input = gets.chomp.downcase.to_sym
+    invalid_input(user_input)
     player_check_column(user_input)
     @board.print_board
     player_vertical_win_clause(user_input)
     player_horizontal_win_clause
     #check diag win condition method
+  end
+
+  def invalid_input(user_input)
+    if user_input == :a
+    elsif user_input == :b
+    elsif user_input == :c
+    elsif user_input == :d
+    elsif user_input == :e
+    elsif user_input == :f
+    elsif user_input == :g
+    else
+      puts @message.error_message
+      turn
+    end
   end
 
   def comp_turn
@@ -78,6 +93,8 @@ class Game
     end
   end
 
+
+
   def player_vertical_win_clause(user_input)
   vertical = @board.hash_columns[user_input].each_with_index.map{|x,i| x == "X"? i : nil}.compact
    if vertical == [0, 1, 2, 3]
@@ -85,6 +102,8 @@ class Game
    elsif vertical == [1, 2, 3, 4]
      player_win
    elsif vertical == [2, 3, 4, 5]
+     player_win
+   elsif vertical == [3, 4, 5, 6]
      player_win
    end
   end
@@ -238,6 +257,14 @@ class Game
     end
   end
 
+  def draw
+    @board.hash_columns.each do |key|
+      if key[5] != "."
+        @message.draw_message
+        abort
+      end
+    end
+  end
 
   def player_win
     @message.player_win_message
