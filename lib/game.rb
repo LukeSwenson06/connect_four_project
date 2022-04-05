@@ -20,6 +20,7 @@ class Game
   end
 
   def invalid_input(user_input)
+
     if user_input == :a
     elsif user_input == :b
     elsif user_input == :c
@@ -54,6 +55,7 @@ class Game
   def player_check_column(user_input)
     if @board.hash_columns[user_input][5] == "."
        player_place_piece(user_input)
+
     else
        @message.error_message
        player_turn
@@ -103,8 +105,7 @@ class Game
      player_win
    elsif vertical == [2, 3, 4, 5]
      player_win
-   elsif vertical == [3, 4, 5, 6]
-     player_win
+   else
    end
   end
 
@@ -119,6 +120,12 @@ class Game
       player_win
     elsif six == [3, 4, 5, 6]
       player_win
+    elsif six == [0, 1, 2, 3 , 4]
+      player_win
+    elsif six == [1, 2, 3, 4 , 5]
+      player_win
+    elsif six == [2, 3, 4, 5 , 6]
+      player_win
     end
 
     five = row5.each_with_index.map{|x,i| x == "X"? i : nil}.compact
@@ -129,6 +136,12 @@ class Game
     elsif five == [2, 3, 4, 5]
       player_win
     elsif five == [3, 4, 5, 6]
+      player_win
+    elsif five == [0, 1, 2, 3 , 4]
+      player_win
+    elsif five == [1, 2, 3, 4 , 5]
+      player_win
+    elsif five == [2, 3, 4, 5 , 6]
       player_win
     end
 
@@ -141,6 +154,12 @@ class Game
       player_win
     elsif four == [3, 4, 5, 6]
       player_win
+    elsif four == [0, 1, 2, 3 , 4]
+      player_win
+    elsif four == [1, 2, 3, 4 , 5]
+      player_win
+    elsif four == [2, 3, 4, 5 , 6]
+      player_win
     end
 
     three = row3.each_with_index.map{|x,i| x == "X"? i : nil}.compact
@@ -151,6 +170,10 @@ class Game
     elsif three == [2, 3, 4, 5]
       player_win
     elsif three == [3, 4, 5, 6]
+      player_win
+    elsif three == [0, 1, 2, 3 , 4]
+      player_win
+    elsif three == [1, 2, 3, 4 , 5]
       player_win
     end
 
@@ -163,6 +186,12 @@ class Game
       player_win
     elsif two == [3, 4, 5, 6]
       player_win
+    elsif two == [0, 1, 2, 3 , 4]
+      player_win
+    elsif two == [1, 2, 3, 4 , 5]
+      player_win
+    elsif two == [2, 3, 4, 5 , 6]
+      player_win
     end
 
     one = row1.each_with_index.map{|x,i| x == "X"? i : nil}.compact
@@ -173,6 +202,12 @@ class Game
     elsif one == [2, 3, 4, 5]
       player_win
     elsif one == [3, 4, 5, 6]
+      player_win
+    elsif one == [0, 1, 2, 3 , 4]
+      player_win
+    elsif one == [1, 2, 3, 4 , 5]
+      player_win
+    elsif one == [2, 3, 4, 5 , 6]
       player_win
     end
   end
@@ -199,6 +234,12 @@ class Game
       computer_win
     elsif six == [3, 4, 5, 6]
       computer_win
+    elsif six == [0, 1, 2, 3 , 4]
+      computer_win
+    elsif six == [1, 2, 3, 4 , 5]
+      computer_win
+    elsif six == [2, 3, 4, 5 , 6]
+      computer_win
     end
 
     five = row5.each_with_index.map{|x,i| x == "O"? i : nil}.compact
@@ -209,6 +250,12 @@ class Game
     elsif five == [2, 3, 4, 5]
       computer_win
     elsif five == [3, 4, 5, 6]
+      computer_win
+    elsif five == [0, 1, 2, 3 , 4]
+      computer_win
+    elsif five == [1, 2, 3, 4 , 5]
+      computer_win
+    elsif five == [2, 3, 4, 5 , 6]
       computer_win
     end
 
@@ -221,6 +268,12 @@ class Game
       computer_win
     elsif four == [3, 4, 5, 6]
       computer_win
+    elsif four == [0, 1, 2, 3 , 4]
+      computer_win
+    elsif four == [1, 2, 3, 4 , 5]
+      computer_win
+    elsif four == [2, 3, 4, 5 , 6]
+      computer_win
     end
 
     three = row3.each_with_index.map{|x,i| x == "O"? i : nil}.compact
@@ -231,6 +284,12 @@ class Game
     elsif three == [2, 3, 4, 5]
       computer_win
     elsif three == [3, 4, 5, 6]
+      computer_win
+    elsif three == [0, 1, 2, 3 , 4]
+      computer_win
+    elsif three == [1, 2, 3, 4 , 5]
+      computer_win
+    elsif three == [2, 3, 4, 5 , 6]
       computer_win
     end
 
@@ -243,6 +302,12 @@ class Game
       computer_win
     elsif two == [3, 4, 5, 6]
       computer_win
+    elsif two == [0, 1, 2, 3 , 4]
+      computer_win
+    elsif two == [1, 2, 3, 4 , 5]
+      computer_win
+    elsif two == [2, 3, 4, 5 , 6]
+      computer_win
     end
 
     one = row1.each_with_index.map{|x,i| x == "O"? i : nil}.compact
@@ -253,6 +318,12 @@ class Game
     elsif one == [2, 3, 4, 5]
       computer_win
     elsif one == [3, 4, 5, 6]
+      computer_win
+    elsif one == [0, 1, 2, 3 , 4]
+      computer_win
+    elsif one == [1, 2, 3, 4 , 5]
+      computer_win
+    elsif one == [2, 3, 4, 5 , 6]
       computer_win
     end
   end
