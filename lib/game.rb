@@ -16,6 +16,7 @@ class Game
     @board.print_board
     player_vertical_win_clause(user_input)
     player_horizontal_win_clause
+    draw
     #check diag win condition method
   end
 
@@ -41,6 +42,7 @@ class Game
     @board.print_board
     comp_vertical_win_clause(comp_input)
     comp_horizontal_win_clause
+    draw
     #check diag win condition method
   end
 
@@ -64,7 +66,6 @@ class Game
     if @board.hash_columns[comp_input][5] == "."
        comp_place_piece(comp_input)
     else
-       @message.error_message
        comp_turn
     end
   end
@@ -81,7 +82,8 @@ class Game
 
   def start
     @message.welcome_message
-    start_input = gets.chomp.downcase
+    board_clear
+    start_input = STDIN.gets.chomp.downcase
     if start_input == 'start'
       turn
     elsif start_input == 'exit'
@@ -93,7 +95,15 @@ class Game
     end
   end
 
-
+  def board_clear
+    @board.hash_columns[:a] = ['.', '.', '.', '.', '.', '.']
+    @board.hash_columns[:b] = ['.', '.', '.', '.', '.', '.']
+    @board.hash_columns[:c] = ['.', '.', '.', '.', '.', '.']
+    @board.hash_columns[:d] = ['.', '.', '.', '.', '.', '.']
+    @board.hash_columns[:e] = ['.', '.', '.', '.', '.', '.']
+    @board.hash_columns[:f] = ['.', '.', '.', '.', '.', '.']
+    @board.hash_columns[:g] = ['.', '.', '.', '.', '.', '.']
+  end
 
   def player_vertical_win_clause(user_input)
   vertical = @board.hash_columns[user_input].each_with_index.map{|x,i| x == "X"? i : nil}.compact
@@ -258,21 +268,26 @@ class Game
   end
 
   def draw
-    @board.hash_columns.each do |key|
-      if key[5] != "."
+    draw_block = []
+    @board.hash_columns.each do |key, value|
+      if @board.hash_columns[key][5] != "."
+        draw_block << key
+        if draw_block == [:a, :b, :c, :d, :e, :f, :g]
         @message.draw_message
-        abort
+        start
+        end
       end
+
     end
   end
 
   def player_win
     @message.player_win_message
-    abort
+    start
   end
 
   def computer_win
     @message.computer_win_message
-    abort
+    start
   end
 end
