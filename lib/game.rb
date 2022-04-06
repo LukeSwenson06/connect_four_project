@@ -8,80 +8,6 @@ class Game
     @message = Message.new
   end
 
-  def player_turn
-    @message.player_message
-    user_input = gets.chomp.downcase.to_sym
-    invalid_input(user_input)
-    player_check_column(user_input)
-    @board.print_board
-    player_vertical_win_clause(user_input)
-    player_horizontal_win_clause
-    draw
-    #check diag win condition method
-  end
-
-  def invalid_input(user_input)
-
-    if user_input == :a
-    elsif user_input == :b
-    elsif user_input == :c
-    elsif user_input == :d
-    elsif user_input == :e
-    elsif user_input == :f
-    elsif user_input == :g
-    else
-      puts @message.error_message
-      turn
-    end
-  end
-
-  def comp_turn
-    choices = [:a, :b, :c, :d, :e, :f, :g]
-    choices.shuffle!
-    comp_input = choices[0]
-    comp_check_column(comp_input)
-    @board.print_board
-    comp_vertical_win_clause(comp_input)
-    comp_horizontal_win_clause
-    draw
-    #check diag win condition method
-  end
-
-  def turn
-    player_turn
-    comp_turn
-    turn
-  end
-
-
-  def player_check_column(user_input)
-    if @board.hash_columns[user_input][5] == "."
-       player_place_piece(user_input)
-
-    else
-       @message.error_message
-       player_turn
-    end
-  end
-
-  def comp_check_column(comp_input)
-    if @board.hash_columns[comp_input][5] == "."
-       comp_place_piece(comp_input)
-    else
-       comp_turn
-    end
-  end
-
-  def player_place_piece(user_input)
-    index = @board.hash_columns[user_input].find_index(".")
-    @board.hash_columns[user_input][index] = "X"
-  end
-
-  def comp_place_piece(comp_input)
-    index = @board.hash_columns[comp_input].find_index(".")
-    @board.hash_columns[comp_input][index] = "O"
-  end
-
   def start
     @message.welcome_message
     board_clear
@@ -89,7 +15,7 @@ class Game
     if start_input == 'start'
       turn
     elsif start_input == 'exit'
-      p 'sucks to suck'
+      p 'Later Skater'
       abort
     else
       @message.invalid_input_message
@@ -106,6 +32,82 @@ class Game
     @board.hash_columns[:f] = ['.', '.', '.', '.', '.', '.']
     @board.hash_columns[:g] = ['.', '.', '.', '.', '.', '.']
   end
+
+  def turn
+    player_turn
+    comp_turn
+    turn
+  end
+
+  def player_turn
+    @message.player_message
+    user_input = gets.chomp.downcase.to_sym
+    invalid_input(user_input)
+    player_check_column(user_input)
+    @board.print_board
+    player_vertical_win_clause(user_input)
+    player_horizontal_win_clause
+    draw
+    #check diag win condition method
+  end
+
+  def invalid_input(user_input)
+    if user_input == :a
+    elsif user_input == :b
+    elsif user_input == :c
+    elsif user_input == :d
+    elsif user_input == :e
+    elsif user_input == :f
+    elsif user_input == :g
+    elsif user_input == :exit
+      p "Later Skater"
+      abort
+    else
+      puts @message.error_message
+      turn
+    end
+  end
+
+  def player_check_column(user_input)
+    if @board.hash_columns[user_input][5] == "."
+      player_place_piece(user_input)
+    else
+      @message.error_message
+      player_turn
+    end
+  end
+
+  def player_place_piece(user_input)
+    index = @board.hash_columns[user_input].find_index(".")
+    @board.hash_columns[user_input][index] = "X"
+  end
+
+
+  def comp_turn
+    choices = [:a, :b, :c, :d, :e, :f, :g]
+    choices.shuffle!
+    comp_input = choices[0]
+    comp_check_column(comp_input)
+    @board.print_board
+    comp_vertical_win_clause(comp_input)
+    comp_horizontal_win_clause
+    draw
+    #check diag win condition method
+  end
+
+  def comp_check_column(comp_input)
+    if @board.hash_columns[comp_input][5] == "."
+       comp_place_piece(comp_input)
+    else
+       comp_turn
+    end
+  end
+
+  def comp_place_piece(comp_input)
+    index = @board.hash_columns[comp_input].find_index(".")
+    @board.hash_columns[comp_input][index] = "O"
+  end
+
 
   def player_vertical_win_clause(user_input)
   vertical = @board.hash_columns[user_input].each_with_index.map{|x,i| x == "X"? i : nil}.compact
@@ -184,6 +186,8 @@ class Game
     elsif three == [0, 1, 2, 3 , 4]
       player_win
     elsif three == [1, 2, 3, 4 , 5]
+      player_win
+    elsif three == [2, 3, 4 , 5, 6]
       player_win
     end
 
@@ -338,20 +342,6 @@ class Game
     end
   end
 
-  def draw
-    draw_block = []
-    @board.hash_columns.each do |key, value|
-      if @board.hash_columns[key][5] != "."
-        draw_block << key
-        if draw_block == [:a, :b, :c, :d, :e, :f, :g]
-        @message.draw_message
-        start
-        end
-      end
-
-    end
-  end
-
   def player_win
     @message.player_win_message
     start
@@ -360,5 +350,18 @@ class Game
   def computer_win
     @message.computer_win_message
     start
+  end
+
+  def draw
+    draw_block = []
+    @board.hash_columns.each do |key, value|
+      if @board.hash_columns[key][5] != "."
+        draw_block << key
+        if draw_block == [:a, :b, :c, :d, :e, :f, :g]
+          @message.draw_message
+          start
+        end
+      end
+    end
   end
 end
