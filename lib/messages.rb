@@ -14,7 +14,7 @@ class Message
   end
 
   def error_message
-    puts "Invalid column, please select column (A-G)."
+    puts "Invalid column."
   end
 
   def computer_message
@@ -28,10 +28,10 @@ class Message
 
   def player_win_message
     puts "Congrulations! You won!"
-    end
+  end
 
   def computer_win_message
-    puts "Game Over! Please try again."
+    puts "Game Over, you lose! Please try again."
   end
 
   def draw_message
